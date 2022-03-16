@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: AddProduct(),
+      home: HomePage(),
     );
   }
 }
@@ -46,12 +46,12 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Product',
+            icon: Icon(Icons.list_alt_rounded),
+            label: 'Product List',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Bill',
+            icon: Icon(Icons.add_shopping_cart_rounded),
+            label: 'Bill Section',
           ),
         ],
         currentIndex: _selectedIndex,
