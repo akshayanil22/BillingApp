@@ -7,53 +7,58 @@ class AddProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
+        child: ListView(
           children: [
-            Row(
-              children: [
-                Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                      color: Colors.blueGrey[100],
-                      image: const DecorationImage(
-                          image: AssetImage('assets/image.png')),
-                      borderRadius: BorderRadius.circular(20)),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      TextField(
-                        decoration: InputDecoration(
-                            hintText: 'Item Name',
-                            label: const Text(
-                              'Name',
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                            hintText: 'Item Description',
-                            label: const Text(
-                              'Description',
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                      )
-                    ],
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: Row(
+                children: [
+                  Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey[100],
+                        image: const DecorationImage(
+                            image: AssetImage('assets/image.png')),
+                        borderRadius: BorderRadius.circular(20)),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        TextField(
+                          decoration: InputDecoration(
+                              hintText: 'Item Name',
+                              label: const Text(
+                                'Name',
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                              hintText: 'Item Description',
+                              label: const Text(
+                                'Description',
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             Container(
                 padding: EdgeInsets.all(20),
@@ -84,6 +89,7 @@ class AddProduct extends StatelessWidget {
                         ),
                         Expanded(
                           child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(primary: Colors.green),
                             onPressed: () {},
                             icon: Icon(Icons.qr_code),
                             label: Text('QR Code'),
@@ -111,11 +117,13 @@ class AddProduct extends StatelessWidget {
                     ),
                   ],
                 )),
-            Spacer(),
+            SizedBox(height: 100,),
             SizedBox(
                 height: 50,
                 width: double.infinity,
-                child: ElevatedButton(onPressed: (){}, child: Text('Add'),)),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                  onPressed: (){}, child: Text('Add'),)),
           ],
         ),
       ),

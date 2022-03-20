@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ProductListWidget extends StatelessWidget {
-  const ProductListWidget({
-    Key? key,
-  }) : super(key: key);
+
+  late String productImage;
+
+  ProductListWidget({this.productImage = 'assets/image.png'});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class ProductListWidget extends StatelessWidget {
       width: double.infinity,
       height: 100,
       decoration: BoxDecoration(
-          color: Colors.lightGreen[100],
+          color: Colors.lightGreen[200],
           borderRadius: BorderRadius.circular(10)
       ),
       child: Row(
@@ -22,8 +23,12 @@ class ProductListWidget extends StatelessWidget {
             height: 80,
             width: 80,
             decoration: BoxDecoration(
-              color: Colors.blueGrey,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: AssetImage(productImage),
+                fit: BoxFit.cover
+              )
             ),
           ),
           Container(
@@ -32,10 +37,10 @@ class ProductListWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                Text('Name'),
+                Text('Name',style: TextStyle(fontWeight: FontWeight.bold),),
                 SizedBox(height: 5,),
                 Text('Code No',style: TextStyle(
-                    color: Colors.grey
+                  fontSize: 12,
                 ),),
               ],
             ),

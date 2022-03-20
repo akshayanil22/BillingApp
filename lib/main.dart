@@ -39,10 +39,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Titile'),
-      ),
-      body: Center(child: _selectedIndex == 0 ? ProductList():BillSection(),),
+      body: SafeArea(child: Center(child: _selectedIndex == 0 ? ProductList():BillSection(),)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -55,10 +52,11 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.lightGreen,
         onTap: _onItemTapped,
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
         child: Icon(Icons.add),
         onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (context)=>AddProduct()));

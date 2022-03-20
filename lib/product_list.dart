@@ -9,7 +9,7 @@ class ProductList extends StatelessWidget {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (context,index){
-        return ProductListWidget();
+        return ProductListWidget(productImage: 'assets/image1.jfif',);
       },
     );
   }
