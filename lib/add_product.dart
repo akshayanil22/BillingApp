@@ -1,6 +1,8 @@
 import 'package:billing_app/drop_down_item.dart';
 import 'package:flutter/material.dart';
 
+import 'bar_scan.dart';
+
 class AddProduct extends StatelessWidget {
   const AddProduct({Key? key}) : super(key: key);
 
@@ -61,7 +63,7 @@ class AddProduct extends StatelessWidget {
               ),
             ),
             Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 margin: const EdgeInsets.symmetric(vertical: 50),
                 height: 200,
                 width: MediaQuery.of(context).size.width,
@@ -90,7 +92,9 @@ class AddProduct extends StatelessWidget {
                         Expanded(
                           child: ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(primary: Colors.green),
-                            onPressed: () {},
+                            onPressed: () {
+                              _navigateAndDisplaySelection(context);
+                            },
                             icon: Icon(Icons.qr_code),
                             label: Text('QR Code'),
                           ),
@@ -104,7 +108,7 @@ class AddProduct extends StatelessWidget {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
-                              label: Text('Item Code'),
+                              label: const Text('Item Code'),
                               hintText: 'Code',
                             ),
                           ),
@@ -117,7 +121,7 @@ class AddProduct extends StatelessWidget {
                     ),
                   ],
                 )),
-            SizedBox(height: 100,),
+            const SizedBox(height: 100,),
             SizedBox(
                 height: 50,
                 width: double.infinity,
@@ -128,5 +132,20 @@ class AddProduct extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _navigateAndDisplaySelection(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Selection Screen.
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => BarScan()),
+    );
+
+    // After the Selection Screen returns a result, hide any previous snackbars
+    // and show the new result.
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text('$result')));
   }
 }
