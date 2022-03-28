@@ -1,10 +1,41 @@
 import 'package:billing_app/drop_down_item.dart';
+import 'package:billing_app/model/product_model.dart';
 import 'package:flutter/material.dart';
 
 import 'bar_scan.dart';
+import 'database_handler.dart';
 
-class AddProduct extends StatelessWidget {
+class AddProduct extends StatefulWidget {
   const AddProduct({Key? key}) : super(key: key);
+
+  @override
+  State<AddProduct> createState() => _AddProductState();
+}
+
+class _AddProductState extends State<AddProduct> {
+
+  late DatabaseHandler handler;
+
+  late String nameOfProduct;
+  late String descriptionOfProduct;
+
+  late double priceOfProduct;
+
+  late String unitOfProduct;
+
+  late String qrCodeOfProduct;
+
+  Future<int> addProducts(String name1,double price1,String unit1) async {
+
+    Product productDetails = Product(name: name1, price: price1, unit: unit1);
+    return await handler.insertProduct(productDetails);
+  }
+
+  @override
+  void initState() {
+    handler = DatabaseHandler();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +74,9 @@ class AddProduct extends StatelessWidget {
                               ),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10))),
+                          onChanged: (v){
+                            nameOfProduct = v;
+                          },
                         ),
                         const SizedBox(
                           height: 10,
@@ -54,7 +88,10 @@ class AddProduct extends StatelessWidget {
                                 'Description',
                               ),
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
+                                  borderRadius: BorderRadius.circular(10)),),
+                          onChanged: (v){
+                            descriptionOfProduct = v;
+                          },
                         )
                       ],
                     ),
@@ -84,6 +121,9 @@ class AddProduct extends StatelessWidget {
                               label: Text('Item Price'),
                               hintText: 'Price',
                             ),
+                            onChanged: (v){
+                              priceOfProduct = double.parse(v);
+                            },
                           ),
                         ),
                         const SizedBox(
@@ -102,21 +142,21 @@ class AddProduct extends StatelessWidget {
                       ],
                     ),
                     Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              label: const Text('Item Code'),
-                              hintText: 'Code',
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(child: Container(child: DropDownItem())),
+                      children: const [
+                        // Expanded(
+                        //   child: TextField(
+                        //     decoration: InputDecoration(
+                        //       border: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10)),
+                        //       label: const Text('Item Code'),
+                        //       hintText: 'Code',
+                        //     ),
+                        //   ),
+                        // ),
+                        // const SizedBox(
+                        //   width: 10,
+                        // ),
+                        Expanded(child: DropDownItem()),
                       ],
                     ),
                   ],
@@ -127,7 +167,9 @@ class AddProduct extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.green),
-                  onPressed: (){}, child: Text('Add'),)),
+                  onPressed: (){
+                    addProducts(nameOfProduct, priceOfProduct, 'count');
+                  }, child: Text('Add'),)),
           ],
         ),
       ),
@@ -147,5 +189,7 @@ class AddProduct extends StatelessWidget {
     ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text('$result')));
+
+    qrCodeOfProduct = result;
   }
 }

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class ProductListWidget extends StatelessWidget {
 
   late String productImage;
+  late String name;
 
-  ProductListWidget({this.productImage = 'assets/image.png'});
+  ProductListWidget({this.productImage = 'assets/image.png', required this.name});
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +38,10 @@ class ProductListWidget extends StatelessWidget {
             height: 80,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text('Name',style: TextStyle(fontWeight: FontWeight.bold),),
-                SizedBox(height: 5,),
-                Text('Code No',style: TextStyle(
+              children: [
+                Text(name,style: const TextStyle(fontWeight: FontWeight.bold),),
+                const SizedBox(height: 5,),
+                const Text('Code No',style: TextStyle(
                   fontSize: 12,
                 ),),
               ],
