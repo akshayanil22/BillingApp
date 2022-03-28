@@ -1,4 +1,5 @@
 import 'package:billing_app/drop_down_item.dart';
+import 'package:billing_app/main.dart';
 import 'package:billing_app/model/product_model.dart';
 import 'package:flutter/material.dart';
 
@@ -115,6 +116,7 @@ class _AddProductState extends State<AddProduct> {
                       children: [
                         Expanded(
                           child: TextField(
+                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
@@ -169,6 +171,7 @@ class _AddProductState extends State<AddProduct> {
                   style: ElevatedButton.styleFrom(primary: Colors.green),
                   onPressed: (){
                     addProducts(nameOfProduct, priceOfProduct, 'count');
+                    Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=>MyApp()),(route) => false,);
                   }, child: Text('Add'),)),
           ],
         ),

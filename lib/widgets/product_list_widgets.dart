@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 
 class ProductListWidget extends StatelessWidget {
 
-  late String productImage;
-  late String name;
+  final String productImage;
+  final String name;
+  final double price;
 
-  ProductListWidget({this.productImage = 'assets/image.png', required this.name});
+  const ProductListWidget({Key? key, this.productImage = 'assets/image.png', required this.name,required this.price}) : super(key: key);
 
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       width: double.infinity,
       height: 100,
       decoration: BoxDecoration(
@@ -55,7 +56,7 @@ class ProductListWidget extends StatelessWidget {
               color: Colors.blueGrey[100],
               borderRadius: BorderRadius.circular(100),
             ),
-            child: Center(child: Text('₹40')),
+            child: Center(child: Text('₹${price.toString()}')),
           )
         ],
       ),

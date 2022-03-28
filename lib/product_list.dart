@@ -20,18 +20,29 @@ class _ProductListState extends State<ProductList> {
     handler = DatabaseHandler();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: handler.retrieveProducts(),
       builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
         if (snapshot.hasData) {
-          return ListView.builder(
+          return snapshot.data!.isEmpty?const Center(child:Text('No Data'))  :ListView.builder(
             itemCount: snapshot.data?.length,
             itemBuilder: (BuildContext context, int index) {
-              return ProductListWidget(
-                productImage: 'assets/image1.jfif',
-                name: snapshot.data![index].name,
+              return GestureDetector(
+                onLongPress: () async{
+                  await handler.deleteProduct(snapshot.data![index].id!);
+                  setState(() {
+                    snapshot.data!.remove(snapshot.data![index]);
+                  });
+                },
+                child: ProductListWidget(
+                  productImage: 'assets/image.png',
+                  name: snapshot.data![index].name,
+                  price: snapshot.data![index].price,
+                ),
               );
             },
           );
